@@ -1,0 +1,19 @@
+body
+  {
+    background-image: linear-gradient(to top left, rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('../pictures/mainbody.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+  }
+  span
+  {
+    color:red;
+  }
+   .regfrm 
+   {
+     background-color: aliceblue;
+     width: 33%;
+     height:auto;
+     position: absolute;top:20%;
+     z-index: 1;
+   }
