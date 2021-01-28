@@ -1,7 +1,7 @@
 <?php
 $errors_fields = array();
 
-if ($_SERVER['REQUEST_METHOD']=='POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     //Validation
 
 if ( !(isset($_POST['name'])) && !empty(isset($_POST['name']))){
@@ -13,7 +13,7 @@ if ( !(isset($_POST['email'])) && filter_input(INPUT_POST, $_POST['email'], FILT
 if ( !(isset($_POST['password'])) && strlen($_POST['password'] > 5 )){
     $errors_fields[2] = 'password';
 }
-}
+
 if(!$errors_fields){
 header("location: form.php?errors_fields=".implode(', ',$errors_fields));
 exit;
@@ -45,9 +45,10 @@ else
     echo mysqli_error($conn);
 }
 }
-// close the connection
-
+}
 mysqli_free_result($result);
+
+// close the connection
 mysqli_close($conn);
 
 ?>

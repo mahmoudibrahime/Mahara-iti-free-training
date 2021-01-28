@@ -1,28 +1,28 @@
 <?php
+session_start(); //session start
+
 if($_SERVER['REQUEST_METHOD'] == $_POST){ //method validation
 
     require 'dbconfig.php';
-
  }
+
 if (isset($_SESSION['id'])){
    echo '<p>Welcome, '.$_SESSION['email'].'<a href="list.php">Logout</a></p>';
 }
 
 if(isset($_POST['submitbtn'])){
 
-$email = mysqli_escape_string($conn, $_POST['email']);
-$password = sha1($_POST['password'], false);
+$email = mysqli_real_escape_string($conn, $_POST['email']);
+$password = sha1($_POST['password']);
 $query = "SELECT * FROM `users` WHERE `email` = '$email' and `password` = '$password'";
 $result = mysqli_query($conn, $query);
 
-session_start();//session start
-
 while($row = mysqli_fetch_assoc($result)){
-$_SESSION['id']=$row['id'];
+$_SESSION['id'] = $row['id'];
 $_SESSION['password'] = $row['password'];
 $_SESSION['email'] = $row['email'];
 
-if($_SESSION['email']==$email && $_SESSION['password']==$password)
+if($_SESSION['email'] == $email && $_SESSION['password'] == $password)
     {
       header("location:list.php");
       exit;

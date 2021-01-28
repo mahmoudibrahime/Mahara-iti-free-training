@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'alahram');
+$conn = mysqli_connect ('localhost', 'root', '', 'alahram');
 if(! $conn)
 {
     die("Connection Error".mysqli_connect_error($conn));

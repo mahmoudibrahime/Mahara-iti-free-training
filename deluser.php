@@ -1,4 +1,5 @@
 <?php
+
 require 'dbconfig.php';//connect to database
 
 //select user

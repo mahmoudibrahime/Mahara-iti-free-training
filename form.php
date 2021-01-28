@@ -1,21 +1,28 @@
-<!-- <?php
-$errors_fields = array();
-require 'dbconfig.php';
-?> -->
+<?php
+     $errors_fields = array(); 
+     require 'dbconfig.php';
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahara | Register Form</title>
     <link rel="stylesheet" href="styles/bootstrap.css">
-    <link rel="stylesheet" href="styles/formstyle.css">
-</head>
-<body>
-      <div class="container regfrm">
+    <link rel="stylesheet" href="styles/form.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" /><body>
+
+<div id="regfrm">
+      <div class="container">
+
         <div>
-          <h4 class="pt-3">Fill in To Register</h4> <hr>
+        <div class="regclose">
+          <i class="fas fa-times" onclick="regfrmclose()"></i>
         </div>
-<form action="add.php" method="post">
+
+        <h4 class="pt-3">Registration Form</h4> <hr>
+        </div>
+
+  <form action="add.php" method="post">
   <div class="form-group">
   <label for="name">Name</label>
       <input type="text" name="name" id="name" class="form-control" value="<?=isset($_POST['name'])?$_POST['name']:''?>">
@@ -32,7 +39,8 @@ require 'dbconfig.php';
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
     <input type="password" name="password" class="form-control" id="exampleInputPassword1" value="<?=isset($_POST['password'])?$_POST['password']:''?>">
-    <?php if(in_array('password', $errors_fields)){echo '<span>*Please enter at least 6 character</span>';}?>
+    <?php if(in_array('password', $errors_fields)){echo '<span>*Please enter at least 6 characters</span>';}?>
+    <small id="passwordHelp" class="form-text text-muted">Please enter password minimum of 6 characters</small>
 
   </div>
   <div class="form-group form-check">
@@ -40,33 +48,14 @@ require 'dbconfig.php';
     <label class="form-check-label" for="exampleCheck1">Admin</label>
   </div>
   <button type="submit" name="btnsubmit" class="btn btn-primary">Register</button>
-</form>
+     </form>
+   </div>
 </div>
+<script>
+  let regfrm = document.getElementById('regfrm');
+  function regfrmclose(){
+    regfrm.style.display = 'none';
+  }
+</script>
 </body>
 </html>
-
-<!-- <?php
-if(!$_SERVER['REQUEST_METHOD'] == 'POST'){echo'Requested method problem';}
-if (isset($_POST["btnsubmit"])){
-
-    $name = mysqli_escape_string($conn, $_POST["name"]);
-    $email = mysqli_escape_string($conn, $_POST["email"]);
-    $password = sha1($_POST["password"]);
-    $admin = (isset($_POST["admin"]))? 1:0;
-
-    $query = "INSERT INTO `users`(`name`, `email`, `admin`, `password`)
-          VALUES ('$name', '$email', '$admin', '$password')";
-
-    if(mysqli_query($conn, $query) )
-{
-    echo "New values are inserted";
-    header('location:list.php');
-    exit;
-}
-else
-{
-   echo mysqli_error($conn);
-}
-}
-mysqli_close($conn);
-?> -->
